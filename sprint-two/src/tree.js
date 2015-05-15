@@ -22,24 +22,10 @@ treeMethods.addChild = function(value){
 
 treeMethods.contains = function(target, node){
   node = node || this;
-  var results = [];
-  if(node.value === target){
-    return true;
-  }
 
-  for(var i = 0; i < node.children.length; i++){
-    results.push(this.contains(target, node.children[i]));
-  }
-
-  return _.some(results,function(value){
-    return value === true;
-  });
-
-/*
-  _.reduce(node.children,function(){
-
-  });
-*/
+  return (node.value === target) || _.reduce(node.children, function(found, child){
+    return found || node.contains(target, child);
+  }, false);
 
 };
 
