@@ -1,0 +1,7 @@
+
+
+
+
+function createStack (){
+  return Stack();
+}
