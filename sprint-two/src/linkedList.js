@@ -15,7 +15,7 @@ var LinkedList = function(){
       this.tail = node;
     }
 
-  };
+  }; // O(1)
 
   list.removeHead = function(){
     //var temp = this.head;
@@ -25,7 +25,7 @@ var LinkedList = function(){
     this.head = newHead;
 
     return prevHeadVal;
-  };
+  }; // O(1)
 
   list.contains = function(target){
 
@@ -40,7 +40,7 @@ var LinkedList = function(){
     }
 
     return false;
-  };
+  }; // O(n)
 
   return list;
 };
