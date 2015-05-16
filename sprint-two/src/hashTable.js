@@ -26,7 +26,9 @@ HashTable.prototype.insert = function(k, v){
   if(!found) bucket.push({key: k, value: v});
 
   this._storage.set(i, bucket);
-};
+}; // O(1)  - but with many collisions it may approach O(n)
+   //       - that is why if buckets get filled the table
+   //       - must be increased in size.
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
@@ -43,7 +45,7 @@ HashTable.prototype.retrieve = function(k){
 
   return result;
 
-};
+}; //O(1) - same as insert
 
 HashTable.prototype.remove = function(k){
 	var i= getIndexBelowMaxForKey(k, this._limit);
@@ -55,9 +57,9 @@ HashTable.prototype.remove = function(k){
 			obj.value = null;
 		}
 	});
-};
+}; // O(1)  - same as insert
 
-/* our target data structure to avoid collision
+/* our target data structure to handle collisions
 [
   [{ key: k1, value: v1},  {key: k4, value: v4}],
 
