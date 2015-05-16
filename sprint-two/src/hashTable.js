@@ -12,14 +12,8 @@ HashTable.prototype._dump = function(){
 
 HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  var bucket;
 
-  if(this._storage.get(i) === undefined){
-  	bucket = [];
-  	this._storage.set(i,bucket);
-  } else{
-  	bucket = this._storage.get(i);
-  }
+  var bucket = this._storage.get(i) || [];
 
   var found = false;
   _.each(bucket, function(obj, key){
@@ -30,13 +24,9 @@ HashTable.prototype.insert = function(k, v){
   });
 
   if(!found) bucket.push({key: k, value: v});
-  this._dump();
-};
 
-obj = {
-  key: "cat",
-  value: "brown"
-}
+  this._storage.set(i, bucket);
+};
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
